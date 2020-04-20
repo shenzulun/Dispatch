@@ -15,6 +15,8 @@ import com.tzrcb.dispatch.model.CommonRequestModel;
 import com.tzrcb.dispatch.model.CommonResponseModel;
 import com.tzrcb.dispatch.util.JsonUtils;
 import com.tzrcb.dispatch.util.check.DataCheckUtil;
+import com.tzrcb.dispatch.util.db.DispatchRecordUtil;
+
 import me.belucky.easytool.util.StringUtils;
 
 /**
@@ -30,16 +32,20 @@ public class RouteFactory {
 	public static CommonResponseModel route(MessageDTO messageDTO) {
 		CommonResponseModel resp = new CommonResponseModel();
 		CommonRequestModel<?> req = JsonUtils.toObject(messageDTO.getJsonStr(), CommonRequestModel.class);
-		
-		resp = check(messageDTO, req);
-		if(StringUtils.isNotNull(resp.getCode())) {
-			return resp;
-		}
-		String transNo = req.getTransNo();
-		//分发
-		String className = "com.tzrcb.dispatch.core.route.handle._" + transNo + "_handler";
+		String transNo = "";
+		String className = "";
 		boolean isRouteExist = false;
 		try {
+			req.setTransMsg(messageDTO.getJsonStr());
+		
+			resp = check(messageDTO, req);
+			if(StringUtils.isNotNull(resp.getCode())) {
+				return resp;
+			}
+			transNo = req.getTransNo();
+			//分发
+			className = "com.tzrcb.dispatch.core.route.handle._" + transNo + "_handler";
+		
 			Boolean v = routeMap.get(className);
 			if(v != null && !v.booleanValue()) {
 				//不存在该路由
@@ -49,6 +55,7 @@ public class RouteFactory {
 				IHander hanlder = (IHander) Class.forName(className).newInstance();
 				resp = hanlder.handle(messageDTO);
 				isRouteExist = true;
+				resp.setTransMsg(JsonUtils.toJson(resp));
 			}
 		} catch (InstantiationException e) {
 			log.error("", e);
@@ -64,6 +71,7 @@ public class RouteFactory {
 			resp.setMessage("该交易码[" + transNo + "]未实现...");
 		} finally {
 			routeMap.put(className, isRouteExist);
+			DispatchRecordUtil.saveAsyn(req, resp);
 		}
 		return resp;
 	}

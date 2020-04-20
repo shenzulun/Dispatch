@@ -4,6 +4,7 @@
  */
 package com.tzrcb.dispatch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tzrcb.dispatch.util.check.DataCheck;
 
 /**
@@ -37,6 +38,17 @@ public class CommonHeader implements java.io.Serializable{
 	 * 版本号(备用字段)
 	 */
 	private String version;
+	/**
+	 * 流水号
+	 */
+	@DataCheck(required=true)
+	private String serno;
+	
+	/**
+	 * 报文内容,过渡使用,不参与序列化
+	 */
+	@JsonIgnore
+	private String transMsg;
 	
 	public CommonHeader() {}
 	
@@ -70,8 +82,21 @@ public class CommonHeader implements java.io.Serializable{
 	public void setVersion(String version) {
 		this.version = version;
 	}
-	
-	
-	
 
+	public String getSerno() {
+		return serno;
+	}
+
+	public void setSerno(String serno) {
+		this.serno = serno;
+	}
+
+	public String getTransMsg() {
+		return transMsg;
+	}
+
+	public void setTransMsg(String transMsg) {
+		this.transMsg = transMsg;
+	}
+	
 }

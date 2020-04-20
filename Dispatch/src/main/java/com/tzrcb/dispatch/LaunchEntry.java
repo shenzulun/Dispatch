@@ -20,11 +20,14 @@ import com.jfinal.core.JFinal;
 import com.jfinal.json.JacksonFactory;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.dialect.Sqlite3Dialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.tzrcb.dispatch.controller.APIController;
 import com.tzrcb.dispatch.controller.IndexController;
+import com.tzrcb.dispatch.model.table.dispatch._DbMappingKit;
 import com.tzrcb.dispatch.util.CommonUtils;
 import me.belucky.easytool.config.JdbcConfig;
 import me.belucky.easytool.jfinal.PropUtils;
@@ -89,13 +92,13 @@ public class LaunchEntry extends JFinalConfig{
 	 */
 	public void configPlugin(Plugins me) {
 		//默认数据源
-//		DruidPlugin druid = createDruidPlugin(); 
-//		me.add(druid);
-//		ActiveRecordPlugin arp = new ActiveRecordPlugin(druid);
-//		arp.setShowSql(prop.getBoolean("showSql", false));
-//		arp.setDialect(new Sqlite3Dialect());
-//		me.add(arp);
-		
+		DruidPlugin druid = createDruidPlugin(); 
+		me.add(druid);
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(druid);
+		arp.setShowSql(prop.getBoolean("showSql", false));
+		arp.setDialect(new Sqlite3Dialect());
+		_DbMappingKit.mapping(arp);
+		me.add(arp);
 	}
 	
 	public static DruidPlugin createDruidPlugin() {	
