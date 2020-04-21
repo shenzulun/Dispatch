@@ -17,9 +17,11 @@
 		实现类的默认包名，也可以每个task自行定义
 		<task id="" classpath="a.b.c" />
 	-->
-	<default-classpath>com.tzrcb.sms.core.task</default-classpath>
+	<default-classpath>com.tzrcb.dispatch.core.task</default-classpath>
 	<!--  
 	<task id="TimeTaskDemo" title="定时任务Demo" type="1" startTime="10:56:05" interval="${5s}" />
 	-->
+	
+	<task id="ConstConfigTask" title="缓存初始化任务" type="1" delay="${1s}" interval="${1d}" />
  
 </tasks>

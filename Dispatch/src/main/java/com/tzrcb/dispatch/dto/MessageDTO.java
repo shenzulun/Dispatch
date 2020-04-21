@@ -16,6 +16,10 @@ public class MessageDTO {
 	
 	private String sign;
 	
+	private String code;
+	
+	private String message;
+	
 	public MessageDTO() {}
 	
 	public MessageDTO(String jsonStr, String sign) {
@@ -40,5 +44,20 @@ public class MessageDTO {
 		this.sign = sign;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 }

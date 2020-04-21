@@ -23,7 +23,7 @@ public class DispatchRecordUtil {
 	
 	protected static Logger log = LoggerFactory.getLogger(DispatchRecordUtil.class);
 
-	private static DispatchRecordService DispatchRecordService = Aop.get(DispatchRecordService.class);
+	private static DispatchRecordService dispatchRecordService = Aop.get(DispatchRecordService.class);
 
 	/**
 	 * 保存分发记录
@@ -45,7 +45,7 @@ public class DispatchRecordUtil {
 		record.set("message", response.getMessage());
 		record.set("response_msg", response.getTransMsg());
 		
-		DispatchRecordService.save(record);
+		dispatchRecordService.save(record);
 		log.info("流水[{}]保存成功...", request.getSerno());
 	}
 	

@@ -7,7 +7,7 @@ package com.tzrcb.dispatch.model.api._10010102;
 import java.util.List;
 
 /**
- * Description: 
+ * Description: 模板短信发送请求体
  * @author shenzulun
  * @date 2020-04-16
  * @version 1.0

@@ -4,8 +4,15 @@
  */
 package com.tzrcb.dispatch.util;
 
+import java.nio.charset.Charset;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
+
+import com.google.common.hash.Hasher;
+import com.google.common.hash.Hashing;
 import com.tzrcb.dispatch.core.ExtraJsonRender;
 import com.tzrcb.dispatch.core.route.RouteFactory;
 import com.tzrcb.dispatch.dto.MessageDTO;
@@ -39,7 +46,7 @@ public class CommonUtils extends me.belucky.easytool.util.CommonUtils{
 	}
 	
 	/**
-	 * 
+	 * 生成JSON返回
 	 * @param code
 	 * @param message
 	 * @return
@@ -75,11 +82,30 @@ public class CommonUtils extends me.belucky.easytool.util.CommonUtils{
 	}
 	
 	/**
-	 * 验签
+	 * hash SHA256
 	 * @param messageDTO
 	 */
-	public static boolean decode(MessageDTO messageDTO) {
-		return true;
+	public static String encodeSHA256(String message, String salt) {
+		String msg = salt + message;
+		Hasher hasher = Hashing.sha256().newHasher();  
+		hasher.putString(msg, Charset.forName("UTF-8"));
+		String str = hasher.hash().toString();
+		return str;
+	}
+	
+	/**
+	 * 格式化
+	 * <pre>
+	 * example: ori = "hello {}" 
+	 * formatStr(ori,"world")
+	 * return "hello world"
+	 * @param ori
+	 * @param params
+	 * @return
+	 */
+	public static String formatStr(String ori, String... params){
+		FormattingTuple ft = MessageFormatter.arrayFormat(ori, params); 
+		return ft.getMessage();
 	}
 	
 }

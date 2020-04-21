@@ -17,6 +17,9 @@ public class _DbMappingKit {
 	
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("T_DISPATCH_RECORD", "id", DispatchRecord.class);
+		arp.addMapping("T_ROUTE_CONFIG", "id", RouteConfig.class);
+		arp.addMapping("T_SERVICE_CONFIG", "id", ServiceConfig.class);
+		arp.addMapping("T_SMS_RECORD", "id", SmsRecord.class);
 	}
 }
 

@@ -14,7 +14,7 @@ import com.jfinal.core.Controller;
  */
 public class IndexController extends Controller{
 	
-	public void hello() {
+	public void index() {
 		renderText("hello world");
 	}
 

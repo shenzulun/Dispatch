@@ -27,11 +27,16 @@ public class CodeConfig {
 	 * 报文校验不通过
 	 */
 	public static final String ERR_1001 = "1001";
+	/**
+	 * 重复交易
+	 */
+	public static final String ERR_2222 = "2222";
 		
 	static {
 		map.put(SUCCESS, "交易成功");
 		map.put(ERR_9999, "交易失败");
 		map.put(ERR_1001, "报文内容校验不通过");
+		map.put(ERR_2222, "重复交易");
 	}
 	
 	public static String getCodeMessage(String code) {

@@ -102,4 +102,14 @@ public class DispatchRecordService {
 	public void deleteById(int id) {
 		dao.deleteById(id);
 	}
+	
+	/**
+	 * 查询交易记录
+	 * @param source
+	 * @param serno
+	 * @return
+	 */
+	public DispatchRecord queryDispatchRecordBySerno(String source, String serno) {
+		return dao.findFirst("select * from T_DISPATCH_RECORD where source=? and serno=? and code='0000' order by id desc", source, serno);
+	}
 }

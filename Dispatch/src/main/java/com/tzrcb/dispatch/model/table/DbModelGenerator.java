@@ -34,7 +34,8 @@ public class DbModelGenerator {
 		// base model 所使用的包名
 		String baseModelPackageName = "com.tzrcb.dispatch.model.table.dispatch.base";
 		// base model 文件保存路径
-		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/main/java/com/tzrcb/dispatch/model/table/dispatch/base";
+//		String baseModelOutputDir = PathKit.getWebRootPath() + "/src/com/tzrcb/dispatch/model/table/dispatch/base";
+		String baseModelOutputDir = "D:/eclipse-workspace/Dispatch/src/com/tzrcb/dispatch/model/table/dispatch/base";
 		
 		// model 所使用的包名 (MappingKit 默认使用的包名)
 		String modelPackageName = "com.tzrcb.dispatch.model.table.dispatch";
@@ -47,7 +48,7 @@ public class DbModelGenerator {
 		
 		generator.setMappingKitClassName("_DbMappingKit");
 		
-		generator.setMetaBuilder(new DbMetaBuilder(dataSource, "T_DISPATCH_RECORD"));
+		generator.setMetaBuilder(new DbMetaBuilder(dataSource, "T_DISPATCH_RECORD", "T_SERVICE_CONFIG","T_ROUTE_CONFIG", "T_SMS_RECORD"));
 		// 配置是否生成备注
 		generator.setGenerateRemarks(true);
 		

@@ -144,6 +144,6 @@ public class LaunchEntry extends JFinalConfig{
 	}
 	
 	public static void main(String[] args) {
-		JFinal.start("src/main/webapp", 10086, "/", 5);
+		JFinal.start("WebContent", 10086, "/", 5);
 	}
 }
